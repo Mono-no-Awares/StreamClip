@@ -63,20 +63,25 @@ flowchart LR
 
 ## Installation
 
-### Chrome / Edge / Brave (Unpacked)
+### Option 1: From GitHub Releases (Recommended)
 
-1. Clone or download this repository.
-2. Open `chrome://extensions` and enable **Developer mode**.
-3. Click **Load unpacked** and select either the repository root folder or `dist/chrome/` after running `python scripts/build.py`.
+1. Download the archive for your browser on the [Releases](https://github.com/Mono-no-Awares/StreamClip/releases) page:
+   - **Chrome / Edge / Brave**: `streamclip-chrome-v1.0.0.zip`
+   - **Firefox**: `streamclip-firefox-v1.0.0.zip`
+2. **Chrome / Edge / Brave**:
+   - Extract `streamclip-chrome-v1.0.0.zip` into a folder.
+   - Open `chrome://extensions` and enable **Developer mode**.
+   - Click **Load unpacked** and select the extracted folder.
+3. **Firefox**:
+   - Open `about:debugging#/runtime/this-firefox`.
+   - Click **Load Temporary Add-on…** and select `streamclip-firefox-v1.0.0.zip` directly (or extract it and select `manifest.json`).
+   - *(In Firefox Developer Edition / Nightly, you can install `.zip` permanently via `about:addons` if `xpinstall.signatures.required` is set to `false` in `about:config`.)*
 
-### Firefox (Temporary Add-on or Built Package)
+### Option 2: From Source (Build)
 
-1. Run the build script (requires Python 3.10+, zero external pip packages):
-   ```bash
-   python scripts/build.py
-   ```
-2. Open `about:debugging#/runtime/this-firefox`.
-3. Click **Load Temporary Add-on…** and select `dist/firefox/manifest.json` (or install `dist/streamclip-firefox-v1.0.0.zip` in Developer/Nightly builds).
+1. Clone this repository.
+2. **Chrome / Edge / Brave**: open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select the repository root folder (or `dist/chrome/` after building).
+3. **Firefox**: run `python scripts/build.py` (Python 3.10+, no external packages required), then load `dist/firefox/manifest.json` via `about:debugging#/runtime/this-firefox`.
 
 ---
 

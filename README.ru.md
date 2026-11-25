@@ -63,20 +63,25 @@ flowchart LR
 
 ## Установка
 
-### Chrome / Edge / Brave
+### Вариант 1: Из GitHub Releases (рекомендуется)
 
-1. Склонируйте или скачайте репозиторий.
-2. Откройте `chrome://extensions` и включите **Режим разработчика**.
-3. Нажмите **Загрузить распакованное расширение** и выберите корневую папку репозитория (или `dist/chrome/` после сборки).
+1. Скачайте архив для вашего браузера со страницы [Releases](https://github.com/Mono-no-Awares/StreamClip/releases):
+   - **Chrome / Edge / Brave**: `streamclip-chrome-v1.0.0.zip`
+   - **Firefox**: `streamclip-firefox-v1.0.0.zip`
+2. **Chrome / Edge / Brave**:
+   - Распакуйте `streamclip-chrome-v1.0.0.zip` в любую папку.
+   - Откройте `chrome://extensions` и включите **Режим разработчика**.
+   - Нажмите **Загрузить распакованное расширение** и выберите распакованную папку.
+3. **Firefox**:
+   - Откройте `about:debugging#/runtime/this-firefox`.
+   - Нажмите **Загрузить временное дополнение…** и выберите сам архив `streamclip-firefox-v1.0.0.zip` (или распакуйте и укажите `manifest.json`).
+   - *(В Firefox Developer Edition / Nightly можно установить архив постоянно через `about:addons`, отключив проверку подписи `xpinstall.signatures.required = false` в `about:config`.)*
 
-### Firefox
+### Вариант 2: Из исходников (сборка)
 
-1. Соберите пакет для Firefox (нужен только Python 3.10+, без сторонних библиотек):
-   ```bash
-   python scripts/build.py
-   ```
-2. Откройте `about:debugging#/runtime/this-firefox`.
-3. Нажмите **Загрузить временное дополнение…** и выберите `dist/firefox/manifest.json` (либо установите собранный архив `dist/streamclip-firefox-v1.0.0.zip`).
+1. Склонируйте репозиторий.
+2. **Chrome / Edge / Brave**: откройте `chrome://extensions` → **Режим разработчика** → **Загрузить распакованное расширение** → выберите корневую папку репозитория (или `dist/chrome/` после сборки).
+3. **Firefox**: выполните `python scripts/build.py` (нужен только Python 3.10+, без сторонних библиотек) и загрузите `dist/firefox/manifest.json` через `about:debugging#/runtime/this-firefox`.
 
 ---
 
