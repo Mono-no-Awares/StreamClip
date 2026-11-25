@@ -1,0 +1,84 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "1.0.0",
+  "author": "Mono no Aware",
+  "homepage_url": "https://github.com/Mono-no-Awares",
+  "default_locale": "en",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "streamclip@streamclip.extension",
+      "strict_min_version": "115.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "permissions": [
+    "downloads",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.twitch.tv/*",
+    "https://gql.twitch.tv/*",
+    "https://usher.ttvnw.net/*",
+    "https://*.ttvnw.net/*",
+    "https://*.kick.com/*",
+    "https://*.live-video.net/*",
+    "https://*.cloudfront.net/*",
+    "https://*.akamaized.net/*",
+    "https://*.fastly.net/*"
+  ],
+  "background": {
+    "scripts": [
+      "vendor/mux.min.js",
+      "src/core/m3u8-parser.js",
+      "src/core/mp4-muxer.js",
+      "src/core/clip-builder.js",
+      "src/platforms/twitch.js",
+      "src/platforms/kick.js",
+      "src/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.twitch.tv/*",
+        "https://*.kick.com/*"
+      ],
+      "js": [
+        "src/content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "clip-last-30": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "__MSG_cmdClip30__"
+    },
+    "clip-last-60": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "__MSG_cmdClip60__"
+    }
+  }
+}

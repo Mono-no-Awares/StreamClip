@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StreamClip</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body data-platform="twitch">
+  <div class="ambient-glow"></div>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">
+          <img class="brand-icon" src="../../icons/icon-32.png" alt="">
+        </div>
+        <div class="brand-meta">
+          <span class="brand-name">StreamClip</span>
+          <span class="brand-sub">MP4 CLIPPER</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span id="modeBadge" class="badge"></span>
+        <button id="langToggle" class="icon-btn text-btn" type="button">RU</button>
+        <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.01a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.01a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.01a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section id="loadingView" class="state-card motion-in">
+      <div class="kinetic-loader">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <p id="loadingText" class="muted"></p>
+    </section>
+
+    <section id="emptyView" class="state-card motion-in hidden">
+      <div class="empty-title" id="emptyTitle"></div>
+      <p class="muted" id="emptyDesc"></p>
+      <button id="retryBtn" class="btn btn-secondary hidden" type="button"></button>
+    </section>
+
+    <main id="mainView" class="main hidden">
+      <section class="card stream-card motion-stagger-1">
+        <div class="stream-top">
+          <span id="platformPill" class="platform-pill"></span>
+          <span id="streamerName" class="streamer-name"></span>
+        </div>
+        <div id="streamTitle" class="stream-title"></div>
+        <div id="timelineInfo" class="timeline-info"></div>
+      </section>
+
+      <section class="card motion-stagger-2">
+        <div class="field-row">
+          <label for="qualitySelect" id="qualityLabel" class="label"></label>
+          <span id="qualityHint" class="hint"></span>
+        </div>
+        <div class="select-wrap">
+          <select id="qualitySelect" class="select"></select>
+        </div>
+      </section>
+
+      <section class="card trim-card motion-stagger-3">
+        <div class="field-row">
+          <span id="rangeLabel" class="label"></span>
+          <span id="durationBadge" class="duration-pill"></span>
+        </div>
+
+        <div id="rangeSlider" class="trim-timeline">
+          <div class="trim-ruler"></div>
+          <div id="sliderFill" class="trim-window" data-role="window">
+            <div class="trim-window-glow"></div>
+          </div>
+          <div id="thumbStart" class="trim-handle trim-handle-left" role="slider" tabindex="0" data-role="start">
+            <span class="trim-grip"></span>
+            <span id="tipStart" class="trim-tip">00:00:00</span>
+          </div>
+          <div id="thumbEnd" class="trim-handle trim-handle-right" role="slider" tabindex="0" data-role="end">
+            <span class="trim-grip"></span>
+            <span id="tipEnd" class="trim-tip">00:00:30</span>
+          </div>
+        </div>
+
+        <div class="trim-scale">
+          <span class="scale-val">00:00:00</span>
+          <span id="scaleMax" class="scale-val">00:00:00</span>
+        </div>
+
+        <div class="time-inputs">
+          <label class="time-box">
+            <span id="startLabel" class="time-caption"></span>
+            <input id="startInput" class="time-input" type="text" value="00:00:00" spellcheck="false">
+          </label>
+          <div class="time-arrow">→</div>
+          <label class="time-box">
+            <span id="endLabel" class="time-caption"></span>
+            <input id="endInput" class="time-input" type="text" value="00:00:30" spellcheck="false">
+          </label>
+        </div>
+
+        <div class="presets">
+          <button id="btnLast30" class="chip" type="button"></button>
+          <button id="btnLast60" class="chip" type="button"></button>
+          <button id="btnAtPlayer" class="chip chip-accent hidden" type="button"></button>
+        </div>
+      </section>
+
+      <section class="filename-box motion-stagger-4">
+        <span id="fileLabel" class="file-label"></span>
+        <code id="filenamePreview" class="file-name"></code>
+      </section>
+
+      <section id="progressBox" class="card progress-box hidden">
+        <div class="progress-head">
+          <span id="progressStatus" class="progress-status"></span>
+          <span id="progressPct" class="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <div id="progressMeta" class="progress-meta"></div>
+      </section>
+
+      <div id="errorBox" class="error-box hidden"></div>
+
+      <div class="actions motion-stagger-5">
+        <button id="downloadBtn" class="btn btn-primary" type="button"></button>
+        <button id="cancelBtn" class="btn btn-danger hidden" type="button"></button>
+      </div>
+    </main>
+
+    <section id="settingsView" class="settings-view motion-in hidden">
+      <div class="settings-header">
+        <span id="settingsTitle" class="settings-title"></span>
+        <button id="settingsBackBtn" class="chip chip-compact" type="button"></button>
+      </div>
+
+      <div class="card">
+        <div class="setting-row">
+          <span id="defaultQualityLabel" class="label"></span>
+          <select id="defaultQualitySelect" class="select select-compact">
+            <option value="source">Source</option>
+            <option value="1080">1080p</option>
+            <option value="720">720p</option>
+            <option value="480">480p</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <span id="maxClipLabel" class="label"></span>
+          <select id="maxClipSelect" class="select select-compact">
+            <option value="300">5 min</option>
+            <option value="600">10 min</option>
+          </select>
+        </div>
+
+        <label class="toggle-row">
+          <span id="skipAdsLabel" class="label"></span>
+          <input id="skipAdsToggle" class="toggle-input" type="checkbox" checked>
+          <span class="toggle-track"></span>
+        </label>
+
+        <label class="toggle-row">
+          <span id="saveAsLabel" class="label"></span>
+          <input id="saveAsToggle" class="toggle-input" type="checkbox">
+          <span class="toggle-track"></span>
+        </label>
+
+        <label class="toggle-row">
+          <span id="hotkeysLabel" class="label"></span>
+          <input id="hotkeysToggle" class="toggle-input" type="checkbox">
+          <span class="toggle-track"></span>
+        </label>
+
+        <div id="hotkeysHint" class="hotkeys-hint hidden"></div>
+      </div>
+    </section>
+
+    <footer class="credits-bar">
+      <span class="credits-text">Created by</span>
+      <a class="credits-link" href="https://github.com/Mono-no-Awares" target="_blank" rel="noopener noreferrer">Mono no Aware</a>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

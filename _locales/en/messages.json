@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "StreamClip — Twitch & Kick MP4 Clipper"
+  },
+  "extDescription": {
+    "message": "Clip any time range from Twitch and Kick streams or VODs directly to MP4 with independent quality selection and ad skipping."
+  },
+  "cmdClip30": {
+    "message": "Clip last 30 seconds"
+  },
+  "cmdClip60": {
+    "message": "Clip last 60 seconds"
+  }
+}
