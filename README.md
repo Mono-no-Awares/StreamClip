@@ -18,9 +18,9 @@
 ## Preview
 
 <p align="center">
-  <img src="assets/preview-twitch.png" alt="StreamClip on Twitch" width="320" />
+  <img src="assets/streamclip-twitch-v2.png" alt="StreamClip on Twitch" width="320" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/preview-kick.png" alt="StreamClip on Kick" width="320" />
+  <img src="assets/streamclip-kick-v2.png" alt="StreamClip on Kick" width="320" />
 </p>
 
 ---

@@ -18,9 +18,9 @@
 ## Превью
 
 <p align="center">
-  <img src="assets/preview-twitch.png" alt="StreamClip на Twitch" width="320" />
+  <img src="assets/streamclip-twitch-v2.png" alt="StreamClip на Twitch" width="320" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="assets/preview-kick.png" alt="StreamClip на Kick" width="320" />
+  <img src="assets/streamclip-kick-v2.png" alt="StreamClip на Kick" width="320" />
 </p>
 
 ---
